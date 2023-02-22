@@ -1,0 +1,46 @@
+https://leetcode.com/problems/koko-eating-bananas/description/
+
+Input: piles = [3,6,7,11], h = 8
+Output: 4
+
+Input: piles = [30,11,23,4,20], h = 5
+Output: 30
+
+Input: piles = [30,11,23,4,20], h = 6
+Output: 23
+
+for input first
+The problem ask to find the min speed k eating bananas/hr. if we try to find the max speed k then it will be maximum pile and thus, total of completion will becomes
+4 that is the length of input. in similar fashion we can conclude that h > piles.length to complete the eating otherwise if h=3 and input.length = 4 then, even if
+speed if max i.e 11 then still koko can't eat all bananas.
+
+Approach:
+Try to find the max k then instead of decreasing k linearly and checking whether koko eat all piles apply BS on k ie. BS on search space.
+
+class Solution {
+public:
+    bool isValid(vector<int>& piles, int h,int mid){
+        long hours=0;
+        for(int pile:piles){
+            hours+=pile/mid;
+            if(pile%mid!=0)
+                hours++;
+        }
+        return hours<=h ? true:false; //Check that Koko eats within the h hrs given in Question
+    }
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int n=piles.size();
+        int s=1,e=1e9; // 1
+        int ans;
+        while(s<=e){
+            int mid=s+(e-s)/2;
+            if(isValid(piles,h,mid)==true){ //To check whether the situation is possible
+                ans=mid; // If koko can eat, mid bananas per hour in less then or equals to h time
+                e=mid-1; // Decrement our right pointer to optimise better solution 
+            }
+            else
+                s=mid+1; // Increment 
+        }
+        return ans;
+    }
+};
