@@ -44,3 +44,6 @@ public:
         return ans;
     }
 };
+
+TC: O(NLogW) W is the max bananas from all piles
+SC: O(1)
