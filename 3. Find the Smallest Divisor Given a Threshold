@@ -1,0 +1,30 @@
+https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/solutions/?orderBy=most_votes
+
+Input: nums = [1,2,5,9], threshold = 6
+Output: 5
+
+Input: nums = [44,22,33,11,1], threshold = 5
+Output: 44
+
+Explanation
+Binary search the result.
+If the sum > threshold, the divisor is too small.
+If the sum <= threshold, the divisor is big enough.
+
+int smallestDivisor(vector<int>& A, int threshold) {
+    int left = 1, right = 1e6, m, sum;
+    while (left < right) {
+        m = (left + right) / 2, sum = 0;
+        for (int i : A)
+            sum += (i + m - 1) / m;
+        if (sum > threshold)
+            left = m + 1;
+        else
+            right = m;
+    }
+    return left;
+}
+
+Complexity
+Time O(NlogM), where M = max(A)
+Space O(1)
