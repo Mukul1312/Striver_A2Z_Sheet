@@ -1,0 +1,62 @@
+https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/description/
+
+Input: bloomDay = [1,10,3,10,2], m = 3, k = 1
+Output: 3
+
+Input: bloomDay = [1,10,3,10,2], m = 3, k = 2
+Output: -1
+
+Input: bloomDay = [7,7,7,7,12,7,7], m = 2, k = 3
+Output: 12
+
+Intuition
+If m * k > n, it impossible, so return -1.
+Otherwise, it's possible, we can binary search the result.
+left = 1 is the smallest days,
+right = 1e9 is surely big enough to get m bouquests.
+So we are going to binary search in space range [left, right].
+
+Explanation
+canMakeMBouquets is the criteria in that needs to for making all m*k flower bloom in possibleDay.
+if it can then store ans & search for minimum possibleDay by lowering the upper bound range using high = mid - 1.
+if it can't then raising the lower bound range by low = mid + 1;
+
+class Solution {
+public:
+    bool canMakeMBouquets(vector<int> bloomDay, int m, int k, int possibleDay){
+        int streak = 0, i = 0;
+        while(m != 0 && i<bloomDay.size()){
+            if(possibleDay >= bloomDay[i]) streak++;
+            else streak = 0;
+            if(streak == k){
+                m--;
+                streak = 0;
+            }
+            i++; // move to next flower
+        }
+        return m == 0 ? true : false;
+    }
+    int minDays(vector<int>& bloomDay, long m, long k) {
+        long long unsigned int low = m*k;
+        int high=0, ans = -1;
+        if(low > bloomDay.size()) return -1;
+
+        for(int day: bloomDay)
+            high = max(day, high);
+
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            int possibleDay = mid;
+            if(canMakeMBouquets(bloomDay, m, k, possibleDay)){
+                ans = possibleDay;
+                high = mid - 1;
+            }
+            else low = mid + 1;
+        }
+        return ans;
+    }
+};
+
+Complexity
+Time: O(nlog(max(bloomDay)-m*k) where max(bloomDay) is the maximum value.
+Space: O(1).
