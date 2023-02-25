@@ -36,6 +36,5 @@ string removeOuterParentheses(string s) {
 }
 
 
-Time Complexity:
-O(N) Time, O(N) space
-
+Time Complexity: O(N)
+Space Complexity: O(N)
