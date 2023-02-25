@@ -1,0 +1,41 @@
+https://leetcode.com/problems/remove-outermost-parentheses/solutions/270022/java-c-python-count-opened-parenthesis/?orderBy=most_votes
+
+Input: s = "(()())(())"
+Output: "()()()"
+
+Input: s = "(()())(())(()(()))"
+Output: "()()()()(())"
+
+Input: s = "()()"
+Output: ""
+
+Explanation:
+count the number of opened parenthesis.
+Add every char to the result,
+unless the first left parenthesis,
+and the last right parenthesis.
+
+string removeOuterParentheses(string s) {
+    string ans;
+    int st;
+    for(auto a:s){
+        if(a=='('){
+            if(st>0){
+                ans +='(';
+            }
+            st++;
+        }
+        else{
+            st--;
+            if(st>0){
+                ans +=')';
+            }
+        }
+    }
+    return ans;
+}
+
+
+Time Complexity:
+O(N) Time, O(N) space
+
