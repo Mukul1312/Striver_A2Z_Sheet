@@ -47,6 +47,6 @@ private:
 bool isDigit(char ch){
     return ch >= '0' && ch <= '9';
 }
-    
+
 TC: O(n)
 SC: O(1)
