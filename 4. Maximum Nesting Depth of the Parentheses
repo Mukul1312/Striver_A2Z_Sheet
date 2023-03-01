@@ -1,0 +1,24 @@
+Easy level
+https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/description/
+
+Input: s = "(1+(2*3)+((8)/4))+1"
+Output: 3
+Explanation: Digit 8 is inside of 3 nested parentheses in the string.
+
+Input: s = "(1)+((2))+(((3)))"
+Output: 3
+
+class Solution {
+public:
+    int maxDepth(string s) {
+        int maxDepth = 0;
+        int depth = 0;
+
+        for(char c : s){
+            if(c == '(')depth++; 
+            else if(c == ')') depth--;
+            if(depth > maxDepth) maxDepth = depth;
+        }
+        return maxDepth;
+    }
+};
