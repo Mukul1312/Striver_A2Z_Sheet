@@ -1,0 +1,52 @@
+Easy
+https://leetcode.com/problems/reverse-linked-list/description/
+
+Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]
+
+Input: head = [1,2]
+Output: [2,1]
+
+Input: head = []
+Output: []
+
+Approach:
+1. Three pointer iterative approach
+2. Recursive approach
+
+Approach 1:
+https://media.geeksforgeeks.org/wp-content/cdn-uploads/RGIF2.gif
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode *nextNode, *prevNode = NULL;
+        while (head) {
+            nextNode = head->next;
+            head->next = prevNode;
+            prevNode = head;
+            head = nextNode;
+        }
+        return prevNode;
+    }
+};
+
+TC: O(N)
+SC: O(1)
+
+Approach 2:
+class Solution {
+public:
+  ListNode* reverseList(ListNode* &head) {
+
+      if (head == NULL||head->next==NULL)
+          return head;
+
+      ListNode* nnode = reverseList(head->next);
+      head->next->next = head;
+      head->next = NULL;
+      return nnode;
+  }
+};
+TC: O(N)
+SC: O(1)
