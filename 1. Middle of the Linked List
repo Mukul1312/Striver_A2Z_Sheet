@@ -1,0 +1,52 @@
+Easy
+https://leetcode.com/problems/middle-of-the-linked-list/description/
+
+Input: head = [1,2,3,4,5]
+Output: [3,4,5]
+Explanation: The middle node of the list is node 3.
+
+Input: head = [1,2,3,4,5,6]
+Output: [4,5,6]
+Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.
+
+Approach:
+1. Find length and then traverse n/2 times.
+2. Two pointer approach (slow and fast).
+
+Approach 1:
+ListNode* middleNode(ListNode* head) {
+    ListNode* temp = head;
+    ListNode* travel = head;
+    int count = 0;
+
+    while(travel != NULL){
+        count++;
+        travel = travel -> next;
+    }
+
+    int half = count/2;
+
+    while(half--){
+        temp = temp -> next;
+    }
+
+    return temp;
+}
+
+TC: O(N + N/2) 2 PASS
+SC: O(1)
+
+Approach 2: Tortoise-Hare Approach
+slow moves 1 steps & fast move 2 steps.
+
+Logic: fast will always move steps 2x & slow moves x steps. this implies -> slow will be always be at middle.
+
+ListNode* middleNode(ListNode* head) {
+    ListNode *slow = head, *fast = head;
+    while (fast && fast->next)
+        slow = slow->next, fast = fast->next->next;
+    return slow;
+}
+
+TC: O(N) 1 PASS
+SC: O(1)
