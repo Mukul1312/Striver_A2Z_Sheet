@@ -1,0 +1,38 @@
+Medium Level
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
+Input: head = [1,2,3,4,5], n = 2
+Output: [1,2,3,5]
+Example 2:
+
+Input: head = [1], n = 1
+Output: []
+Example 3:
+
+Input: head = [1,2], n = 1
+Output: [1]
+
+Approach: fast & slow pointer
+move fast n steps. then both fast & slow traverse LL by one steps until fast reaches NULL.
+
+Now, we can't start code from by pointing both fast & slow to head because their is an edge case. (when n == size of linkedList)
+
+For solving this we have to start from NULL which points to head.
+
+ListNode * start = new ListNode();
+start -> next = head;
+ListNode* fast = start;
+ListNode* slow = start;    
+if(!head->next) return NULL; 
+
+while(n--){
+    fast = fast -> next;
+}
+
+while(fast && fast -> next){
+    fast = fast -> next;
+    slow = slow -> next;
+}
+
+slow -> next = slow -> next -> next;
+return start -> next;
