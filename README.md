@@ -4,4 +4,5 @@ Will solve 2 questions everyday and upload their code
 
 | Steps |    Topics   | Start Date | End Date |
 |:-----:|:-----------:|:----------:|:--------:|
-|   6   | Linked List |  12 March  |     -    |
+|   6   | Linked List |  12 March  | 17 March |
+|   7   | Recursion   |  17 March  |     -    |
